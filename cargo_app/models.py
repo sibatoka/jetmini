@@ -13,9 +13,7 @@ class Customer(models.Model):
         verbose_name='Фамилия',
     )
     telephone_number = models.IntegerField(
-        max_length=15,
         verbose_name='Номер телефона',
-        digits=True,
     )
     passport = models.CharField(
         max_length=25,
@@ -29,10 +27,12 @@ class Cargo(models.Model):
     
     weight = models.DecimalField(
         max_digits=7,
+        decimal_places=3,
         verbose_name='Вес в кг.',
     )
     volume = models.DecimalField(
         max_digits=7,
+        decimal_places=3,
         verbose_name='Объем в куб.м',
     )
     category = models.CharField(
@@ -48,10 +48,12 @@ class Truck(models.Model):
     )
     weight = models.DecimalField(
         max_digits=25,
+        decimal_places=3,
         verbose_name='Грузоподъемность'
     )
     volume = models.DecimalField(
         max_digits=25,
+        decimal_places=3,
         verbose_name='Объем'
     )
     brend = models.CharField(
@@ -83,7 +85,6 @@ class Driver(models.Model):
         verbose_name='Фамилия'
     )
     telephone_number = models.IntegerField(
-        max_length=25,
         verbose_name='Номер телефона'
     )
     passport = models.CharField(
@@ -128,10 +129,10 @@ class Invoice(models.Model):
         'Location',
         on_delete=models.CASCADE
     )
-    point_b = models.ForeignKey(
-        'Location',
-        on_delete=models.CASCADE,
-    )
+    # point_b = models.ForeignKey(
+    #     'Location',
+    #     on_delete=models.CASCADE,
+    # )
     
 class WayBill(models.Model):
     
@@ -147,10 +148,10 @@ class WayBill(models.Model):
         'Location',
         on_delete=models.CASCADE
     )
-    point_b = models.ForeignKey(
-        'Location',
-        on_delete=models.CASCADE,
-    )
+    # point_b = models.ForeignKey(
+    #     'Location',
+    #     on_delete=models.CASCADE,
+    # )
     
 class Order(models.Model):
     
