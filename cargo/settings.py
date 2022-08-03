@@ -51,7 +51,8 @@ INSTALLED_APPS = [
     'cargo_app.apps.CargoAppConfig',
     
     # installed lib
-    'rest_framework'
+    'rest_framework',
+    'phonenumber_field',
 ]
 
 MIDDLEWARE = [
