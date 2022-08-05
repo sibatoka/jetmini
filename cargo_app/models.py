@@ -1,8 +1,7 @@
 from unicodedata import name
 from django.db import models
-from phonenumber_field.modelfields import PhoneNumberField
 from django.core.validators import MinValueValidator
-
+from phonenumber_field.modelfields import PhoneNumberField
 
 # Create your models here.
 class Customer(models.Model):
@@ -150,7 +149,6 @@ class Category(models.Model):
         ordering = ('-create_date', )
 
     
-    
 class Truck(models.Model):
         
     truck_number = models.CharField(
@@ -203,6 +201,14 @@ class Truck(models.Model):
         auto_now=True,
         verbose_name='Дата обновления записи'
     )
+    
+    
+    def get_categories(self):
+        return '\n'.join(
+            [category.name for category in self.cargo_category.all()]
+        )
+        
+        
     def __str__(self):
         return f'{self.vin_code}|{self.truck_number}'
        
@@ -211,7 +217,6 @@ class Truck(models.Model):
         verbose_name_plural = 'Грузовики',
         ordering = ('-create_date', )
 
-    
     
 class Driver(models.Model):
         
@@ -252,6 +257,14 @@ class Driver(models.Model):
         auto_now=True,
         verbose_name='Дата обновления записи'
     )
+    
+    
+    def get_categories(self):
+        return '\n'.join(
+            [category.name for category in self.cargo_category.all()]
+        )
+        
+        
     def __str__(self):
         return f'Водитель: {self.name} {self.surname}'
        
@@ -293,6 +306,7 @@ class Location(models.Model):
 
         unique_together = ('country', 'city', 'address')
     
+    
 class Invoice(models.Model):
      
     customer = models.ForeignKey(
@@ -322,6 +336,14 @@ class Invoice(models.Model):
         auto_now=True,
         verbose_name='Дата обновления записи'
     )
+
+    
+    def get_cargos(self):
+        return '\n'.join(
+            [str(cargo) for cargo in self.cargo.all()]
+        )
+        
+        
     def __str__(self):
         return f'Заявка № {self.id}'
        
@@ -330,7 +352,6 @@ class Invoice(models.Model):
         verbose_name_plural = 'Заявки',
         ordering = ('-create_date', )
 
-        
     
 class WayBill(models.Model):
     
@@ -386,6 +407,13 @@ class Order(models.Model):
         auto_now=True,
         verbose_name='Дата обновления записи'
     )
+    
+    def get_invoices(self):
+        return '\n'.join(
+            [str(invoice) for invoice in self.invoice.all()]
+        )
+    
+        
     def __str__(self):
         return f'Заказ № {self.id}'
        
