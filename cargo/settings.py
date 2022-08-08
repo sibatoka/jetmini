@@ -46,11 +46,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    
-    # local apps
+    'drf_yasg',
     'cargo_app.apps.CargoAppConfig',
-    
-    # installed lib
     'rest_framework',
     'phonenumber_field',
 ]
